@@ -14,6 +14,14 @@ namespace App1.Views
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 AutomationId = "zxingScannerView",
+				Options = new ZXing.Mobile.MobileBarcodeScanningOptions()
+				{
+					PossibleFormats = new System.Collections.Generic.List<ZXing.BarcodeFormat>()
+					{
+						ZXing.BarcodeFormat.EAN_13
+					},
+					TryHarder = true
+				}
             };
             _zxing.OnScanResult += (result) =>
                 Device.BeginInvokeOnMainThread(async () =>
@@ -33,8 +41,8 @@ namespace App1.Views
             {
                 TopText = "Hold your phone up to the barcode",
                 BottomText = "Scanning will happen automatically",
-                ShowFlashButton = _zxing.HasTorch,
-                AutomationId = "zxingDefaultOverlay",
+                ShowFlashButton = true,//_zxing.HasTorch,
+                AutomationId = "zxingDefaultOverlay"
             };
             overlay.FlashButtonClicked += (sender, e) =>
             {
